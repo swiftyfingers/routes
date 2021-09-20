@@ -17,6 +17,7 @@
 		2F78B3E626F91107000F4D16 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F78B3E526F91107000F4D16 /* MapViewController.swift */; };
 		2F78B3E826F91110000F4D16 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F78B3E726F91110000F4D16 /* MapView.swift */; };
 		2F78B3EA26F91125000F4D16 /* MapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F78B3E926F91125000F4D16 /* MapPresenter.swift */; };
+		2F78B3ED26F915C0000F4D16 /* UserLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F78B3EC26F915C0000F4D16 /* UserLocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		2F78B3E526F91107000F4D16 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		2F78B3E726F91110000F4D16 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		2F78B3E926F91125000F4D16 /* MapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPresenter.swift; sourceTree = "<group>"; };
+		2F78B3EC26F915C0000F4D16 /* UserLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,8 +142,9 @@
 			isa = PBXGroup;
 			children = (
 				2F78B3E526F91107000F4D16 /* MapViewController.swift */,
-				2F78B3E726F91110000F4D16 /* MapView.swift */,
 				2F78B3E926F91125000F4D16 /* MapPresenter.swift */,
+				2F78B3E726F91110000F4D16 /* MapView.swift */,
+				2F78B3EC26F915C0000F4D16 /* UserLocationManager.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				2F78B3EA26F91125000F4D16 /* MapPresenter.swift in Sources */,
 				2F78B3E626F91107000F4D16 /* MapViewController.swift in Sources */,
 				2F78B3B626F90FC0000F4D16 /* SceneDelegate.swift in Sources */,
+				2F78B3ED26F915C0000F4D16 /* UserLocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

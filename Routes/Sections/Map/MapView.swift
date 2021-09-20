@@ -12,6 +12,7 @@ class MapView: UIView {
     
     private lazy var mapView: MKMapView = {
         let mapView = MKMapView()
+        mapView.showsUserLocation = true
         return mapView
     }()
     
@@ -34,5 +35,16 @@ class MapView: UIView {
             mapView.trailingAnchor.constraint(equalTo: trailingAnchor),
             mapView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+    }
+}
+
+extension MapView: MapPresentable {
+    
+    func setInitialRegion(_ region: MKCoordinateRegion) {
+        mapView.setRegion(region, animated: true)
+    }
+    
+    func updateCenter(_ coordinate: CLLocationCoordinate2D) {
+        mapView.setCenter(coordinate, animated: true)
     }
 }
