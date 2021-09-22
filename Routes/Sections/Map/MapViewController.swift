@@ -31,8 +31,9 @@ class MapViewController: UIViewController {
     // MARK: Life Cycle
     
     override func loadView() {
+        super.loadView()
         self.view = mapView
-        self.title = "Routes"
+        self.navigationItem.title = "Routes"
     }
     
     override func viewDidLoad() {
