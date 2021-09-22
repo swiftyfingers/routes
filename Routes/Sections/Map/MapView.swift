@@ -41,7 +41,7 @@ class MapView: UIView {
 extension MapView: MapPresentable {
     
     func setInitialRegion(_ region: MKCoordinateRegion) {
-        mapView.setRegion(region, animated: true)
+        mapView.setRegion(region, animated: false)
     }
     
     func updateCenter(_ coordinate: CLLocationCoordinate2D) {

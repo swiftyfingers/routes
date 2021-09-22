@@ -33,6 +33,7 @@ class MapPresenter {
     private lazy var locationManager: CLLocationManager = {
         let locationManager = CLLocationManager()
         locationManager.delegate = userLocationManagerDelegate
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest // Default value.
         return locationManager
     }()
     
@@ -49,8 +50,8 @@ extension MapPresenter: UserLocationManagerDelegate {
         if userLocation == nil {
             self.userLocation = location
             let region = MKCoordinateRegion(center: location.coordinate,
-                                            latitudinalMeters: 750,
-                                            longitudinalMeters: 750)
+                                            span: .init(latitudeDelta: 0.03,
+                                                        longitudeDelta: 0.03))
             presentable?.setInitialRegion(region)
         } else {
             presentable?.updateCenter(location.coordinate)
