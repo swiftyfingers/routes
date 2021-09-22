@@ -31,6 +31,7 @@ class MapView: UIView {
     }
     
     private func setup() {
+        addTapGesture()
         
         [mapView, searchContainerView].forEach {
             addSubview($0)
@@ -47,6 +48,21 @@ class MapView: UIView {
             searchContainerView.topAnchor.constraint(equalTo: topAnchor),
             searchContainerView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
+    }
+    
+    // MARK: Helpers
+    
+    private func addTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapView))
+        tapGesture.numberOfTouchesRequired = 1
+        tapGesture.numberOfTapsRequired = 1
+        self.addGestureRecognizer(tapGesture)
+    }
+    
+    // MARK: Actions
+    
+    @objc private func didTapView() {
+        self.endEditing(true)
     }
 }
 
