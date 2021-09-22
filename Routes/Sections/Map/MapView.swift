@@ -16,6 +16,11 @@ class MapView: UIView {
         return mapView
     }()
     
+    lazy var searchContainerView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
     init() {
         super.init(frame: .zero)
         setup()
@@ -26,25 +31,36 @@ class MapView: UIView {
     }
     
     private func setup() {
-        addSubview(mapView)
-        mapView.translatesAutoresizingMaskIntoConstraints = false
+        
+        [mapView, searchContainerView].forEach {
+            addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         
         NSLayoutConstraint.activate([
             mapView.leadingAnchor.constraint(equalTo: leadingAnchor),
             mapView.topAnchor.constraint(equalTo: topAnchor),
             mapView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            mapView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            mapView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            searchContainerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            searchContainerView.topAnchor.constraint(equalTo: topAnchor),
+            searchContainerView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
 }
 
 extension MapView: MapPresentable {
     
-    func setInitialRegion(_ region: MKCoordinateRegion) {
-        mapView.setRegion(region, animated: false)
-    }
-    
-    func updateCenter(_ coordinate: CLLocationCoordinate2D) {
-        mapView.setCenter(coordinate, animated: true)
+    func didUpdateViewModel(_ mapViewModel: MapViewModel?) {
+        guard let coordinate = mapViewModel?.userLocation?.coordinate else { return }
+        
+        if let span = mapViewModel?.span {
+            let region = MKCoordinateRegion(center: coordinate,
+                                            span: span)
+            mapView.setRegion(region, animated: false)
+        } else {
+            mapView.setCenter(coordinate, animated: false)
+        }
     }
 }

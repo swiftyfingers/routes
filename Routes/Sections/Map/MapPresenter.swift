@@ -9,12 +9,10 @@ import Foundation
 import CoreLocation
 import MapKit
 
-protocol MapPresenterDelegate: AnyObject {
-}
+protocol MapPresenterDelegate: AnyObject { }
 
 protocol MapPresentable: AnyObject {
-    func setInitialRegion(_ region: MKCoordinateRegion)
-    func updateCenter(_ coordinate: CLLocationCoordinate2D)
+    func didUpdateViewModel(_ mapViewModel: MapViewModel?)
 }
 
 class MapPresenter {
@@ -22,7 +20,11 @@ class MapPresenter {
     weak var delegate: MapPresenterDelegate?
     weak var presentable: MapPresentable?
     
-    private var userLocation: CLLocation?
+    private var mapViewModel: MapViewModel? {
+        didSet {
+            presentable?.didUpdateViewModel(mapViewModel)
+        }
+    }
     
     private lazy var userLocationManagerDelegate: UserLocationManager = {
         let userLocationManager = UserLocationManager()
@@ -47,14 +49,14 @@ class MapPresenter {
 extension MapPresenter: UserLocationManagerDelegate {
     
     func didUpdateLocation(_ location: CLLocation) {
-        if userLocation == nil {
-            self.userLocation = location
-            let region = MKCoordinateRegion(center: location.coordinate,
-                                            span: .init(latitudeDelta: 0.03,
-                                                        longitudeDelta: 0.03))
-            presentable?.setInitialRegion(region)
+        if mapViewModel?.userLocation == nil {
+            let initialSpan = MKCoordinateSpan(latitudeDelta: 0.03,
+                                               longitudeDelta: 0.03)
+            mapViewModel = MapViewModel(span: initialSpan,
+                                        userLocation: location)
         } else {
-            presentable?.updateCenter(location.coordinate)
+            mapViewModel = MapViewModel(span: nil,
+                                        userLocation: location)
         }
     }
 }
